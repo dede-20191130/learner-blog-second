@@ -1,0 +1,132 @@
+---
+title: How to syntax-highlighting for Oracle Java tutorial website
+date: '2016-03-08'
+tags: ['javascript', 'browser extension']
+draft: false
+summary: Using js code injection we can syntax-highlight Oracle Java tutorial website
+---
+
+## Introduction
+
+[Oracle Java Tutorials](https://docs.oracle.com/javase/tutorial/) is useful website for Java beginner or those who wants to recall the knowledge of Java.  
+However, perhaps because the website is old, the codes there have no **syntax-highlighting**.
+
+With the help of a browser(chrome) extension, we can attach new syntax-highlight to those codes and accelerate our learning speed.
+
+## Preparation
+
+1. Install [Script Auto Runner](https://github.com/nakajmg/ScriptAutoRunner)
+2. Open setting window of the extension.
+3. Create new entry and set the name and url(oracle website)
+   ![new entry](https://res.cloudinary.com/ddxhi1rnh/image/upload/v1713428408/learner-blog-second/oracle-java-syntax-highlighting/ua8n95jp5s51mxhroj1m.png)
+
+## Code
+
+Script Auto Runner can inject any Javascript code freely.  
+The injected code runs automatically on opening the website.
+
+This time, I wrote the code below.
+
+```js
+// if document is not fully loaded, load event take the place
+if (document.readyState === 'complete') {
+  restyle()
+} else {
+  window.addEventListener('load', restyle)
+}
+
+function restyle() {
+  // only in specific paths this script runs
+  if (!window.location.pathname.startsWith('/javase/tutorial')) return
+
+  const style = document.createElement('style')
+
+  style.textContent = `
+body em,body i {
+    font-family: sans-serif;
+}
+p > code:not(.language-js){
+    color: blue;
+    font-weight: 600;
+}
+`
+
+  document.head.append(style)
+  highlightCode()
+}
+
+function highlightCode() {
+  const targetTts = Array.from(document.querySelectorAll('.codeblock > pre, pre.codeblock'))
+
+  for (const tt of targetTts) {
+    const pre = document.createElement('pre')
+    const code = document.createElement('code')
+
+    code.classList.add('language-java')
+    code.innerHTML = tt.innerHTML
+
+    // replace tt element with pre + code elements
+    pre.append(code)
+    tt.before(pre)
+    tt.remove()
+  }
+
+  const link = document.createElement('link')
+  link.rel = 'stylesheet'
+  link.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/a11y-dark.min.css'
+
+  const hlScr = document.createElement('script')
+  hlScr.src = '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js'
+  hlScr.onload = () => {
+    hljs.configure({
+      ignoreUnescapedHTML: true,
+    })
+    const schemeScr = document.createElement('script')
+    schemeScr.src =
+      'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js'
+    schemeScr.onload = () => hljs.highlightAll()
+    document.head.append(schemeScr)
+  }
+  document.head.append(link, hlScr)
+}
+```
+
+### Code explanation
+
+```js
+const targetTts = Array.from(document.querySelectorAll('.codeblock > pre, pre.codeblock'))
+```
+
+This line searches all target DOM elements.
+
+```js
+const link = document.createElement('link')
+link.rel = 'stylesheet'
+link.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/a11y-dark.min.css'
+
+const hlScr = document.createElement('script')
+hlScr.src = '//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js'
+hlScr.onload = () => {
+  hljs.configure({
+    ignoreUnescapedHTML: true,
+  })
+  const schemeScr = document.createElement('script')
+  schemeScr.src = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js'
+  schemeScr.onload = () => hljs.highlightAll()
+  document.head.append(schemeScr)
+}
+document.head.append(link, hlScr)
+```
+
+Appending `link, hlScr` in DOM triggers downloading script and style data.  
+After fully downloaded and subsequent parsing HTML finished, we can see syntax-highlighted codes.
+
+## Demo
+
+### Before
+
+![before highlighting](https://res.cloudinary.com/ddxhi1rnh/image/upload/v1713428472/learner-blog-second/oracle-java-syntax-highlighting/zmtkehrchyogg3iwbnht.png)
+
+### After
+
+![after highlighting](https://res.cloudinary.com/ddxhi1rnh/image/upload/v1713428473/learner-blog-second/oracle-java-syntax-highlighting/jvjnnla5yw4iwhxiqyr5.png)
