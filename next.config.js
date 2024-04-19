@@ -77,7 +77,9 @@ module.exports = () => {
           hostname: 'res.cloudinary.com',
         },
       ],
-      unoptimized: true,
+      // unoptimized: true,
+      loader: 'custom',
+      loaderFile: './custom-loader.ts',
     },
     // async headers() {
     //   return [

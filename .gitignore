@@ -47,4 +47,7 @@ yarn-error.log*
 .contentlayer
 
 # editor
-.vscode
+.vscode/
+
+# dev
+dev/
