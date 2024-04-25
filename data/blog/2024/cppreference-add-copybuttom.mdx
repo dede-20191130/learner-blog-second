@@ -1,0 +1,150 @@
+---
+title: How to Add Code Copy Button to CppReference website
+date: '2024-04-25'
+tags: ['c++', 'javascript', 'browser extension']
+draft: false
+summary: Using js code injection we can add code copy button to cppreference website
+---
+
+<TOCInline toc={props.toc} toHeading={3} asDisclosure={true} />
+
+## Introduction
+
+[cppreference.com](https://en.cppreference.com) is essential website for all C and C++ programmers who check the language specification frequently and has a spirit of always trying to write better code.  
+However, currently the example codes in the website are not associated with code copy-to-clipboard button, as those in many modern programming-related website is.
+
+<p>
+  <Image
+    src="/learner-blog-second/cppreference-add-copybuttom/njmmvplkv73og0cbzxce.png"
+    alt="before highlighting"
+    width={1215}
+    height={782}
+    className="img"
+  />
+</p>
+
+With the help of a browser(chrome) extension, we can add the button to anywhere the example codes exist and use the copied code freely such as for running in an IDE or editor, **as long as it does not violate copyright law**.
+
+## Preparation
+
+1. Install [Script Auto Runner](https://github.com/nakajmg/ScriptAutoRunner)
+2. Open setting window of the extension.
+3. Create new entry and set the name and url of the target ewbsite
+   <p>
+     <Image
+       src="/learner-blog-second/cppreference-add-copybuttom/puht5rvun7lcvgtdi7wr.png"
+       alt="before highlighting"
+       width={878}
+       height={180}
+       className="img"
+     />
+   </p>
+
+## Code
+
+Script Auto Runner can inject any Javascript code freely.  
+The injected code runs automatically on opening the website.
+
+This time, I wrote the code below.
+
+```js
+const myStyleTxt = `
+.sar-custom-code-parent {position: relative;}
+.sar-custom-copybtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 16px;
+}
+`
+
+// if document is not fully loaded, load event take the place
+if (document.readyState === 'complete') {
+  restyle()
+} else {
+  window.addEventListener('load', restyle)
+}
+
+function restyle() {
+  createCustomStyle()
+  createCopyButton()
+}
+
+function createCustomStyle() {
+  const style = document.createElement('style')
+  style.textContent = myStyleTxt
+  document.head.appendChild(style)
+}
+
+function createCopyButton() {
+  const target = document.querySelector('.t-example pre')
+  if (!target) return
+  const example = document.querySelector('*#Example')
+  if (!example) return
+
+  example.parentElement.classList.add('sar-custom-code-parent')
+  const copybyn = document.createElement('button')
+  copybyn.textContent = 'COPY'
+  copybyn.classList.add('sar-custom-copybtn')
+  copybyn.onclick = () => {
+    navigator.clipboard.writeText(target.textContent)
+    copybyn.textContent = 'DONE'
+    setTimeout(() => {
+      copybyn.textContent = 'COPY'
+    }, 3000)
+  }
+  example.parentElement.append(copybyn)
+}
+```
+
+### Code explanation
+
+```js
+const target = document.querySelector('.t-example pre')
+if (!target) return
+const example = document.querySelector('*#Example')
+if (!example) return
+```
+
+If the current page has no Example code, exit the processing.
+
+```js
+copybyn.onclick = () => {
+  navigator.clipboard.writeText(target.textContent)
+  copybyn.textContent = 'DONE'
+  setTimeout(() => {
+    copybyn.textContent = 'COPY'
+  }, 3000)
+}
+```
+
+Copy event has two responsibilities:
+
+- copy the content of the code block into clipboard
+- indicate the user to complete the copy action
+
+## Demo
+
+### Before
+
+<p>
+  <Image
+    src="/learner-blog-second/cppreference-add-copybuttom/np50uyhiyh4mc8bdhedk.png"
+    alt="before highlighting"
+    width={780}
+    height={575}
+    className="img"
+  />
+</p>
+
+### After
+
+<p>
+  <Image
+    src="/learner-blog-second/cppreference-add-copybuttom/a20dr8brbagz0nhuidxx.png"
+    alt="before highlighting"
+    width={837}
+    height={590}
+    className="img"
+  />
+</p>
