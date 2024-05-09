@@ -1,1 +1,8 @@
-{ "algorithm": 1, "cpp": 1, "javascript": 2, "browser-extension": 2, "java": 1 }
+{
+  "algorithm": 2,
+  "the-algorithm-design-manual": 2,
+  "cpp": 1,
+  "javascript": 2,
+  "browser-extension": 2,
+  "java": 1
+}
