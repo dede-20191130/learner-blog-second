@@ -6,8 +6,8 @@ const siteMetadata = {
   description: 'Mainly articles for computer science.',
   language: 'en-us',
   theme: 'dark', // system, dark or light
-  siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
-  siteRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',
+  siteUrl: 'https://learner-blog-second-static.pages.dev/',
+  siteRepo: 'https://github.com/dede-20191130/learner-blog-second',
   siteLogo: '/static/images/logo.png',
   socialBanner: '/static/images/twitter-card.png',
   mastodon: 'https://mastodon.social/@mastodonuser',
