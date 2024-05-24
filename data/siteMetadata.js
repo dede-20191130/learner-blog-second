@@ -6,7 +6,7 @@ const siteMetadata = {
   description: 'Mainly articles for computer science.',
   language: 'en-us',
   theme: 'dark', // system, dark or light
-  siteUrl: 'https://learner-blog-second-static.pages.dev/',
+  siteUrl: 'https://learner-blog-second-static.pages.dev',
   siteRepo: 'https://github.com/dede-20191130/learner-blog-second',
   siteLogo: '/static/images/logo.png',
   socialBanner: '/static/images/twitter-card.png',
