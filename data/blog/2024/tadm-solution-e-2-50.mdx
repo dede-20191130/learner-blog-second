@@ -1,0 +1,43 @@
+---
+title: The Algorithm Design Manual (3rd) Exercise Solution 'E2-50'
+date: '2024-06-29'
+tags: ['algorithm', 'The Algorithm Design Manual']
+draft: false
+summary: My solution for exercise 2-50 in The Algorithm Design Manual
+layout: PostSimple
+---
+
+<TOCInline toc={props.toc} toHeading={4} asDisclosure={true} />
+
+## Introduction
+
+This series is my solutions for algorithm exercises in'The Algorithm Design Manual' 3rd edition.  
+It's my solutions, not model answers, so if you find some mistakes or more sophisticated solutions, please post in comment area below.
+
+## Repository
+
+[Here](https://github.com/dede-20191130/tadm-solutions)
+
+## Exercise 2-50
+
+### Question
+
+Consider the following algorithm to find the minimum element in an array
+of numbers $A[0,...,n]$. One extra variable tmp is allocated to hold the current
+minimum value. Start from $A[0]$; tmp is compared against $A[1], A[2], . . . , A[N]$
+in order. When $A[i] < tmp$, $tmp = A[i]$. What is the expected number of times
+that the assignment operation $tmp = A[i]$ is performed?
+
+### Solution
+
+The probability that the kth element is minimum among the range $[A(0),A(k)]$ is $\frac{1}{k+1}$.
+
+So, the expected number of times is the summation of probability above from $k=0$ to $k=n$.
+
+The formula is:
+
+$$
+\begin{equation}
+    \sum_{k=0}^{n}\frac{1}{k+1}=O(\log{n})
+\end{equation}
+$$
