@@ -1,0 +1,33 @@
+---
+title: The Algorithm Design Manual (3rd) Exercise Solution 'E3-6'
+date: '2024-07-19'
+tags: ['algorithm', 'The Algorithm Design Manual']
+draft: false
+summary: My solution for exercise 3-6 in The Algorithm Design Manual
+layout: PostSimple
+---
+
+<TOCInline toc={props.toc} toHeading={4} asDisclosure={true} />
+
+## Introduction
+
+This series is my solutions for algorithm exercises in'The Algorithm Design Manual' 3rd edition.  
+It's my solutions, not model answers, so if you find some mistakes or more sophisticated solutions, please post in comment area below.
+
+## Repository
+
+[Here](https://github.com/dede-20191130/tadm-solutions)
+
+## Exercise 3-6
+
+### Question
+
+Suppose you seek to maintain the contents of a refrigerator so as to minimize
+food spoilage. What data structure should you use, and how should you use
+it?
+
+### Solution
+
+Queue is the most appropriate.
+
+Assuming the time it takes for food to spoil is the same, food put into the refrigerator earlier is more likely to spoil than food put in later. So it's desirable for that put earlier to be comsumed.
