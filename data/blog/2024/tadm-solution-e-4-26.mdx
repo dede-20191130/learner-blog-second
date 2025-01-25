@@ -1,0 +1,39 @@
+---
+title: The Algorithm Design Manual (3rd) Exercise Solution 'E4-26'
+date: '2025-1-25'
+tags: ['algorithm', 'The Algorithm Design Manual']
+draft: false
+summary: My solution for exercise 4-26 in The Algorithm Design Manual
+layout: PostSimple
+---
+
+<TOCInline toc={props.toc} toHeading={5} asDisclosure={true} />
+
+## Introduction
+
+This series is my solutions for algorithm exercises in'The Algorithm Design Manual' 3rd edition.  
+It's my solutions, not model answers, so if you find some mistakes or more sophisticated solutions, please post in comment area below.
+
+## Repository
+
+[Here](https://github.com/dede-20191130/tadm-solutions)
+
+## Exercise 4-26
+
+### Question
+
+Define the recursion depth of quicksort as the maximum number of successive
+recursive calls it makes before hitting the base case. What are the minimum
+and maximum possible recursion depths for randomized quicksort?
+
+### Solution
+
+#### Minimum depth
+
+All pivots are median and the length of subarrays is exactly half of the original.  
+So $depth=\lceil\lg{n}\rceil$
+
+#### Maximum depth
+
+All pivots are the edge value of the array and the larger length of the two subarrays is only one less than the original.  
+So $depth=n-1$

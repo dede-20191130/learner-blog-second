@@ -1,0 +1,35 @@
+---
+title: The Algorithm Design Manual (3rd) Exercise Solution 'E4-25'
+date: '2025-1-24'
+tags: ['algorithm', 'The Algorithm Design Manual']
+draft: false
+summary: My solution for exercise 4-25 in The Algorithm Design Manual
+layout: PostSimple
+---
+
+<TOCInline toc={props.toc} toHeading={5} asDisclosure={true} />
+
+## Introduction
+
+This series is my solutions for algorithm exercises in'The Algorithm Design Manual' 3rd edition.  
+It's my solutions, not model answers, so if you find some mistakes or more sophisticated solutions, please post in comment area below.
+
+## Repository
+
+[Here](https://github.com/dede-20191130/tadm-solutions)
+
+## Exercise 4-25
+
+### Question
+
+Consider a given pair of different elements in an input array to be sorted,
+say $z_i$ and $z_j$ . What is the most number of times $z_i$ and $z_j$ might be compared
+with each other during an execution of quicksort?
+
+### Solution
+
+1 time, no matter how we choose $z_i$ and $z_j$.
+
+### Explanation
+
+Comparison betweem $z_i$ and $z_j$ only occurs when either of the two is selected as pivot. And if one of them is selected, it's consumed as pivot and excluded the targets of swapping, so $z_i$ and $z_j$ are never compared.
