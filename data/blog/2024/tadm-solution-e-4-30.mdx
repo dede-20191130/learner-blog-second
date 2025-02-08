@@ -1,0 +1,45 @@
+---
+title: The Algorithm Design Manual (3rd) Exercise Solution 'E4-30'
+date: '2025-2-8'
+tags: ['algorithm', 'The Algorithm Design Manual']
+draft: false
+summary: My solution for exercise 4-30 in The Algorithm Design Manual
+layout: PostSimple
+---
+
+<TOCInline toc={props.toc} toHeading={5} asDisclosure={true} />
+
+## Introduction
+
+This series is my solutions for algorithm exercises in'The Algorithm Design Manual' 3rd edition.  
+It's my solutions, not model answers, so if you find some mistakes or more sophisticated solutions, please post in comment area below.
+
+## Repository
+
+[Here](https://github.com/dede-20191130/tadm-solutions)
+
+## Exercise 4-30
+
+### Question
+
+Consider again the problem of merging $k$ sorted length-$n$ arrays into a single
+sorted length-$kn$ array. Consider the algorithm that first divides the $k$ arrays
+into $k/2$ pairs of arrays, and uses the merge subroutine to combine each pair,
+resulting in $k/2$ sorted length-$2n$ arrays. The algorithm repeats this step until
+there is only one length-kn sorted array. What is the running time as a function
+of $n$ and $k$?
+
+### Solution
+
+Let $h$ be the height og the repetition operation of merging of two arrays of equal length.  
+By using the same analysis of Mergesort, the constraint of $h$ is:
+
+$$
+\begin{equation}
+2^{k-1} < k < 2^k \implies h=\lceil\lg{k}\rceil
+\end{equation}
+$$
+
+In each height of repetition, merging takes $O(kn)$ time.
+
+So, Running-time is $O(kn\log{k})$.
