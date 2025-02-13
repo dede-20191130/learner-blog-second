@@ -1,0 +1,31 @@
+---
+title: The Algorithm Design Manual (3rd) Exercise Solution 'E4-31'
+date: '2025-2-13'
+tags: ['algorithm', 'The Algorithm Design Manual']
+draft: false
+summary: My solution for exercise 4-31 in The Algorithm Design Manual
+layout: PostSimple
+---
+
+<TOCInline toc={props.toc} toHeading={5} asDisclosure={true} />
+
+## Introduction
+
+This series is my solutions for algorithm exercises in'The Algorithm Design Manual' 3rd edition.  
+It's my solutions, not model answers, so if you find some mistakes or more sophisticated solutions, please post in comment area below.
+
+## Repository
+
+[Here](https://github.com/dede-20191130/tadm-solutions)
+
+## Exercise 4-31
+
+### Question
+
+Stable sorting algorithms leave equal-key items in the same relative order
+as in the original permutation. Explain what must be done to ensure that
+mergesort is a stable sorting algorithm.
+
+### Solution
+
+The requirement of the stability is that when merging two arrays, of two elements with the same value, the element from the left (lower indices) array takes precedence over the ones from the right (higher indices).
