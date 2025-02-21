@@ -1,0 +1,42 @@
+---
+title: The Algorithm Design Manual (3rd) Exercise Solution 'E4-35'
+date: '2025-2-22'
+tags: ['algorithm', 'The Algorithm Design Manual']
+draft: false
+summary: My solution for exercise 4-35 in The Algorithm Design Manual
+layout: PostSimple
+---
+
+<TOCInline toc={props.toc} toHeading={5} asDisclosure={true} />
+
+## Introduction
+
+This series is my solutions for algorithm exercises in'The Algorithm Design Manual' 3rd edition.  
+It's my solutions, not model answers, so if you find some mistakes or more sophisticated solutions, please post in comment area below.
+
+## Repository
+
+[Here](https://github.com/dede-20191130/tadm-solutions)
+
+## Exercise 4-35
+
+### Question
+
+Let $A[1..n]$ be an array such that the first $n−√n$ elements are already sorted
+(though we know nothing about the remaining elements). Give an algorithm
+that sorts A in substantially better than $n\log{n}$ steps.
+
+### Solution
+
+First We sort $\sqrt{n}$ elements that's not yet sorted. This costs $O(\sqrt{n}\log{\sqrt{n}})$.  
+Then we merge already sorted part and previously sorted $\sqrt{n}$ elements using Mergesort-like combination algorithm. This costs $O(n)$.
+
+$\sqrt{n}$ dominates $\log{n}$, so n dominates $n\log{n}$.
+
+The overall time complexity is:
+
+$$
+\begin{equation}
+O(n)+O(\sqrt{n}\log{\sqrt{n}})=O(n)+O(\sqrt{n}\log{n})=O(n)
+\end{equation}
+$$
