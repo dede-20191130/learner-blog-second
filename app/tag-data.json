@@ -1,8 +1,8 @@
 {
-  "algorithm": 76,
-  "the-algorithm-design-manual": 76,
   "cpp": 1,
   "javascript": 2,
   "browser-extension": 2,
-  "java": 1
+  "java": 1,
+  "algorithm": 78,
+  "the-algorithm-design-manual": 78
 }
